@@ -17,9 +17,6 @@ namespace Adrenak.Tork {
         [SerializeField] Motor motor;
         public Motor Motor { get { return motor; } }
 
-        [SerializeField] Brakes brake;
-        public Brakes Brake { get { return brake; } }
-
         [Header("Add On Components (Populated on Awake)")]
         [SerializeField] List<VehicleAddOn> addOns;
         public List<VehicleAddOn> AddOns { get { return addOns; } }

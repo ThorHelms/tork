@@ -95,11 +95,6 @@ namespace Adrenak.Tork {
         public float motorTorque { get; set; }
 
         /// <summary>
-        /// The torque the brake is applying on the wheel
-        /// </summary>
-        public float brakeTorque { get; set; }
-
-        /// <summary>
         ///Revolutions per minute of the wheel
         /// </summary>
         public float rpm { get; private set; }

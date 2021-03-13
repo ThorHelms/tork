@@ -11,7 +11,6 @@ namespace Adrenak.Tork {
         void Update(){
             m_Vehicle.Motor.value = Input.GetAxis("Vertical");
             m_Vehicle.Steering.value = Input.GetAxis("Horizontal");
-            m_Vehicle.Brake.value = Input.GetKey(KeyCode.Space) ? 1 : 0;
         }
     }
 }

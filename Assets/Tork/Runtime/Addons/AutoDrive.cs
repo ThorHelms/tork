@@ -69,7 +69,6 @@ namespace Adrenak.Tork {
 
             var direction = Direction;
             var multiplier = Mathf.Clamp01(distance / brakingDistance);
-            vehicle.Brake.value = 1 - multiplier;
             vehicle.Motor.value = direction;
             vehicle.Steering.Angle = Mathf.Lerp(vehicle.Steering.Angle, reqAngle, steeringRate) * direction;
         }
