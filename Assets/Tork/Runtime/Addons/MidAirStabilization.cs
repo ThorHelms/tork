@@ -7,7 +7,7 @@ namespace Adrenak.Tork{
         [Header("Mid Air Stabilization")]
         public float stabilizationTorque = 15000;
 
-        public TorkWheel[] m_Wheels;
+        public TorkWheelCollider[] m_Wheels;
 
         private Rigidbody _rigidbody;
 

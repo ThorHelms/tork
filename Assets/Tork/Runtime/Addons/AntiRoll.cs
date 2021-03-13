@@ -6,8 +6,8 @@ namespace Adrenak.Tork {
 	public class AntiRoll : MonoBehaviour {
 		[Serializable]
 		public class Axle {
-			public TorkWheel left;
-			public TorkWheel right;
+			public TorkWheelCollider left;
+			public TorkWheelCollider right;
 			public float force;
 		}
 

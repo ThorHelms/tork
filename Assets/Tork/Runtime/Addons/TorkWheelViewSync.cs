@@ -5,7 +5,7 @@ namespace Adrenak.Tork {
     {
         [System.Serializable]
         public class Entry{
-            public TorkWheel wheel;
+            public TorkWheelCollider wheel;
             public Transform view;
 		    public float offset;
 		    public float angle;

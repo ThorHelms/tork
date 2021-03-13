@@ -19,8 +19,8 @@ namespace Adrenak.Tork {
                 // The minimum turning radius of the vehicle at the given steering angle range
                 var minTurningDia = AckermannUtils.GetRadius(
                     vehicle.Steering.range,
-                    vehicle.Ackermann.AxleSeparation,
-                    vehicle.Ackermann.AxleWidth
+                    vehicle.Ackermann.GetAxleSeparation(),
+                    vehicle.FrontAxle.GetAxleWidth()
                 ) * 2;
 
                 // The center of the vehicle if it turns at the minimum turning radius right now

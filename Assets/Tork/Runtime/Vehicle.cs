@@ -15,5 +15,11 @@ namespace Adrenak.Tork {
 
         [SerializeField] private Motor _motor;
         public Motor Motor => _motor;
+
+        [SerializeField] private TorkAxle _frontAxle;
+        public TorkAxle FrontAxle => _frontAxle;
+
+        [SerializeField] private TorkAxle _backAxle;
+        public TorkAxle BackAxle => _backAxle;
     }
 }
