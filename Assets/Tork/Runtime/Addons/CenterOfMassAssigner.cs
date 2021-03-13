@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 
 namespace Adrenak.Tork {
-    public class CenterOfMassAssigner : VehicleAddOn {
-        [SerializeField] Rigidbody m_Rigidbody;
+    public class CenterOfMassAssigner : MonoBehaviour
+    {
+        private void Start()
+        {
+            var vehicle = GetComponentInParent<Vehicle>();
 
-        void Start() {
-            if (m_Rigidbody == null) 
+            if (vehicle?.Rigidbody == null)
                 return;
-            m_Rigidbody.centerOfMass = m_Rigidbody.transform.InverseTransformPoint(transform.position);
+            vehicle.Rigidbody.centerOfMass = vehicle.Rigidbody.transform.InverseTransformPoint(transform.position);
         }
     }
 }

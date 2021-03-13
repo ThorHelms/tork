@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 namespace Adrenak.Tork {
-    public class AutoDrive : VehicleAddOn {
+    public class AutoDrive : MonoBehaviour
+    {
         public Vehicle vehicle;
         public Vector3 destination;
         public float steeringRate = .5f;

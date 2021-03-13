@@ -1,35 +1,19 @@
-﻿using System.Linq;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using UnityEngine;
 
 namespace Adrenak.Tork {
-    public class Vehicle : MonoBehaviour {
-        [SerializeField] new Rigidbody rigidbody;
-        public Rigidbody Rigidbody { get { return rigidbody; } }
+    public class Vehicle : MonoBehaviour
+    {
+        [SerializeField] private Rigidbody _rigidbody;
+        public Rigidbody Rigidbody => _rigidbody;
 
         [Header("Core Components")]
-        [SerializeField] Ackermann ackermann;
-        public Ackermann Ackermann { get { return ackermann; } }
+        [SerializeField] private Ackermann _ackermann;
+        public Ackermann Ackermann => _ackermann;
 
-        [SerializeField] Steering steering;
-        public Steering Steering { get { return steering; } }
+        [SerializeField] private Steering _steering;
+        public Steering Steering => _steering;
 
-        [SerializeField] Motor motor;
-        public Motor Motor { get { return motor; } }
-
-        [Header("Add On Components (Populated on Awake)")]
-        [SerializeField] List<VehicleAddOn> addOns;
-        public List<VehicleAddOn> AddOns { get { return addOns; } }
-
-        void Awake() {
-            addOns = GetComponentsInChildren<VehicleAddOn>().ToList();
-        }
-
-        public T GetAddOn<T>() where T : VehicleAddOn {
-            foreach (var addOn in addOns)
-                if (addOn is T)
-                    return addOn as T;
-            return null;
-        }
+        [SerializeField] private Motor _motor;
+        public Motor Motor => _motor;
     }
 }

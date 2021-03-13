@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Adrenak.Tork {
-	public class AntiRollUnity : VehicleAddOn {
+	public class AntiRollUnity : MonoBehaviour
+    {
 		[Serializable]
 		public class Axle {
 			public WheelCollider left;
@@ -11,23 +12,29 @@ namespace Adrenak.Tork {
 			public float force;
 		}
 
-		public new Rigidbody rigidbody;
-		public List<Axle> axles;
+        public List<Axle> axles;
+        private Rigidbody _rigidbody;
+
+		private void Start()
+        {
+            var vehicle = GetComponentInParent<Vehicle>();
+            _rigidbody = vehicle.Rigidbody;
+        }
 
 		void FixedUpdate() {
 			foreach(var axle in axles) {
 				var wsDown = transform.TransformDirection(Vector3.down);
 				wsDown.Normalize();
 
-				float travelL = Mathf.Clamp01(axle.left.GetCompressionRatio()) ;
-				float travelR = Mathf.Clamp01(axle.right.GetCompressionRatio());
-				float antiRollForce = (travelL - travelR) * axle.force;
+				var travelL = Mathf.Clamp01(axle.left.GetCompressionRatio()) ;
+				var travelR = Mathf.Clamp01(axle.right.GetCompressionRatio());
+				var antiRollForce = (travelL - travelR) * axle.force;
 
 				if (axle.left.isGrounded)
-					rigidbody.AddForceAtPosition(wsDown * -antiRollForce, axle.left.GetHit().point);
+                    _rigidbody.AddForceAtPosition(wsDown * -antiRollForce, axle.left.GetHit().point);
 			
 				if (axle.right.isGrounded)
-					rigidbody.AddForceAtPosition(wsDown * antiRollForce, axle.right.GetHit().point);
+                    _rigidbody.AddForceAtPosition(wsDown * antiRollForce, axle.right.GetHit().point);
 			}
 		}
 	}

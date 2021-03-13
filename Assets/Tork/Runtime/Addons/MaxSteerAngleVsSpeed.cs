@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
 
 namespace Adrenak.Tork {
-    public class MaxSteerAngleVsSpeed : VehicleAddOn {
+    public class MaxSteerAngleVsSpeed : MonoBehaviour
+    {
         [Tooltip("The steering angle based on the speed (KMPH)")]
         [SerializeField] AnimationCurve curve = AnimationCurve.Linear(0, 35, 250, 5);
 
-        [SerializeField] Steering steering;
-        [SerializeField] new Rigidbody rigidbody;
+        private Steering _steering;
+        private Rigidbody _rigidbody;
+
+        private void Start()
+        {
+            var vehicle = GetComponentInParent<Vehicle>();
+            _rigidbody = vehicle.Rigidbody;
+            _steering = vehicle.Steering;
+        }
+
 
         void Update() {
-            steering.range = GetMaxSteerAtSpeed(rigidbody.velocity.magnitude * 3.6f);
+            _steering.range = GetMaxSteerAtSpeed(_rigidbody.velocity.magnitude * 3.6f);
         }
 
         public float GetMaxSteerAtSpeed(float speed) {

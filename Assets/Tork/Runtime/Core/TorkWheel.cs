@@ -10,9 +10,7 @@
    ratio would still hold. Or maybe it won't. Please change the value as you prefer.
  */
 
-using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 namespace Adrenak.Tork {
     public class TorkWheel : MonoBehaviour {

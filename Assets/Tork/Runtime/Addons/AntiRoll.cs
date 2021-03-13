@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Adrenak.Tork {
-	public class AntiRoll : VehicleAddOn {
+	public class AntiRoll : MonoBehaviour {
 		[Serializable]
 		public class Axle {
 			public TorkWheel left;
@@ -11,7 +11,14 @@ namespace Adrenak.Tork {
 			public float force;
 		}
 
-		public new Rigidbody rigidbody;
+        private Rigidbody _rigidbody;
+
+        private void Start()
+        {
+            var vehicle = GetComponentInParent<Vehicle>();
+            _rigidbody = vehicle.Rigidbody;
+        }
+
 		public List<Axle> axles;
 
 		void FixedUpdate() {
@@ -24,10 +31,10 @@ namespace Adrenak.Tork {
 				float antiRollForce = (travelL - travelR) * axle.force;
 
 				if (axle.left.isGrounded)
-					rigidbody.AddForceAtPosition(wsDown * -antiRollForce, axle.left.hit.point);
+                    _rigidbody.AddForceAtPosition(wsDown * -antiRollForce, axle.left.hit.point);
 			
 				if (axle.right.isGrounded)
-					rigidbody.AddForceAtPosition(wsDown * antiRollForce, axle.right.hit.point);
+                    _rigidbody.AddForceAtPosition(wsDown * antiRollForce, axle.right.hit.point);
 			}
 		}
 	}

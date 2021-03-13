@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 
 namespace Adrenak.Tork { 
-    public class DownForceVsSpeed : VehicleAddOn {
+    public class DownForceVsSpeed : MonoBehaviour
+    {
         [Tooltip("The down force based on the speed (KMPH)")]
         [SerializeField] AnimationCurve curve = AnimationCurve.Linear(0, 0, 250, 2500);
 
-        [SerializeField] new Rigidbody rigidbody;
+        private Rigidbody _rigidbody;
 
-        void Update() {
-            var downForce = GetDownForceAtSpeed(rigidbody.velocity.magnitude * 3.6f);
-            rigidbody.AddForce(-Vector3.up * downForce);
+        private void Start()
+        {
+            var vehicle = GetComponentInParent<Vehicle>();
+            _rigidbody = vehicle.Rigidbody;
         }
 
-        public float GetDownForceAtSpeed(float speed) {
+        private void Update() {
+            var downForce = GetDownForceAtSpeed(_rigidbody.velocity.magnitude * 3.6f);
+            _rigidbody.AddForce(-Vector3.up * downForce);
+        }
+
+        private float GetDownForceAtSpeed(float speed) {
             return curve.Evaluate(speed);
         }
     }

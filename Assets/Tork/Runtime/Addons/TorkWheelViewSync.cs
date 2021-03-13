@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
 namespace Adrenak.Tork {
-	public class TorkWheelViewSync : VehicleAddOn {
+	public class TorkWheelViewSync : MonoBehaviour
+    {
         [System.Serializable]
         public class Entry{
             public TorkWheel wheel;
@@ -23,7 +24,7 @@ namespace Adrenak.Tork {
             }
 		}
 
-		void SyncPosition(Entry entry) {
+		private void SyncPosition(Entry entry) {
             var wheel = entry.wheel;
             var view = entry.view;
             var offset = entry.offset;
@@ -41,7 +42,7 @@ namespace Adrenak.Tork {
 			);
 		}
 
-		void SyncRotation(Entry entry) {
+		private void SyncRotation(Entry entry) {
             var wheel = entry.wheel;
             var view = entry.view;
 

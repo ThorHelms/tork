@@ -695,11 +695,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da1bb9a22dc0004c803629affe1f6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 54767532765438496}
-  ackermann: {fileID: 1214198106228332029}
-  steering: {fileID: 1214198107381208202}
-  motor: {fileID: 1214198106513114726}
-  addOns: []
+  _rigidbody: {fileID: 54767532765438496}
+  _ackermann: {fileID: 1214198106228332029}
+  _steering: {fileID: 1214198107381208202}
+  _motor: {fileID: 1214198106513114726}
 --- !u!1 &1166002035971444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,7 +1199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c22a177a1068d24991f93b52f4d63a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Rigidbody: {fileID: 54767532765438496}
 --- !u!1 &1363730604052870
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,7 +3081,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   midAirSteerTorque: 1500
   midAirSteerInput: 0
-  m_Rigidbody: {fileID: 54767532765438496}
 --- !u!1 &1214198106513114724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,8 +3197,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  steering: {fileID: 1214198107381208202}
-  rigidbody: {fileID: 54767532765438496}
 --- !u!1 &1214198107381208200
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,7 +3311,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rigidbody: {fileID: 54767532765438496}
 --- !u!1 &1214198107650998326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,7 +3354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0e79b937b28b943a9b656eb33ce5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 54767532765438496}
   axles:
   - left: {fileID: 1954840075906366550}
     right: {fileID: 1954582843850377584}
@@ -3412,7 +3405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stabilizationTorque: 20000
-  m_Rigidbody: {fileID: 54767532765438496}
   m_Wheels:
   - {fileID: 1954840075906366550}
   - {fileID: 1954582843850377584}
