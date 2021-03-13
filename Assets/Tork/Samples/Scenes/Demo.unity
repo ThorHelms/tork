@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftWheel: {fileID: 850725696}
   _rightWheel: {fileID: 2142442285}
+  _maxTorque: 10000
 --- !u!1 &194512612
 GameObject:
   m_ObjectHideFlags: 0
@@ -3480,6 +3481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftWheel: {fileID: 1351668074}
   _rightWheel: {fileID: 50801193}
+  _maxTorque: 10000
 --- !u!1 &1450083558
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,53 +4448,6 @@ MonoBehaviour:
   height: 1
   rotationDamping: 8
   heightDamping: 5
---- !u!114 &1958273126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958273131}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ba35be00207f1408fcd9d4f9881aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vehicle: {fileID: 114480414109247086}
-  destination: {x: 0, y: 0, z: 0}
-  steeringRate: 0.5
-  brakingDistance: 10
---- !u!4 &1958273128
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958273131}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2425653308692093168}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1958273131
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1958273128}
-  - component: {fileID: 1958273126}
-  m_Layer: 0
-  m_Name: Auto Drive
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1977217265
 GameObject:
   m_ObjectHideFlags: 0
@@ -7320,7 +7275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 54767531498984270}
-  _ackermann: {fileID: 1214198107478992019}
   _steering: {fileID: 1214198106466624996}
   _motor: {fileID: 1214198107192375048}
   _frontAxle: {fileID: 1434177002}
@@ -7522,7 +7476,6 @@ MonoBehaviour:
   range: 45
   value: 0
   rate: 120
-  ackermann: {fileID: 1214198107478992019}
 --- !u!4 &1214198106466624997
 Transform:
   m_ObjectHideFlags: 0
@@ -7535,7 +7488,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3257784478316417013}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1214198106466624998
 GameObject:
@@ -7633,12 +7586,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28b5a52112c97342bb0ca5d468e15b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleRPM: 600
   maxTorque: 350
   value: 0
   m_MaxReverseInput: -0.5
-  rpmReadonly: 0
-  ackermann: {fileID: 1214198107478992019}
 --- !u!4 &1214198107192375049
 Transform:
   m_ObjectHideFlags: 0
@@ -7651,7 +7601,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3257784478316417013}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1214198107192375050
 GameObject:
@@ -7710,54 +7660,6 @@ GameObject:
   - component: {fileID: 1214198107419512954}
   m_Layer: 0
   m_Name: Mid Air Steering
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1214198107478992018
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214198107478992020}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3257784478316417013}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1214198107478992019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214198107478992020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53113b735cef849498b153d0a11363e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FrontRight: {fileID: 1954582844999989278}
-  m_FrontLeft: {fileID: 1954840077139250488}
-  m_RearRight: {fileID: 1955409032771142630}
-  m_RearLeft: {fileID: 1955367044557331414}
-  angle: 0
---- !u!1 &1214198107478992020
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1214198107478992018}
-  - component: {fileID: 1214198107478992019}
-  m_Layer: 0
-  m_Name: Ackermann
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7834,7 +7736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764731245ae803443bd1dc9cc811e00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!1 &1923494539845486898
 GameObject:
   m_ObjectHideFlags: 0
@@ -7866,7 +7767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764731245ae803443bd1dc9cc811e00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!1 &1923932429713586724
 GameObject:
   m_ObjectHideFlags: 0
@@ -7898,7 +7798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764731245ae803443bd1dc9cc811e00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!1 &1924128091605150646
 GameObject:
   m_ObjectHideFlags: 0
@@ -7930,7 +7829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764731245ae803443bd1dc9cc811e00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!4 &1926056495986016050
 Transform:
   m_ObjectHideFlags: 0
@@ -8281,7 +8179,6 @@ Transform:
   - {fileID: 1214198106211022933}
   - {fileID: 1214198107154108259}
   - {fileID: 2895941578585382577}
-  - {fileID: 1958273128}
   m_Father: {fileID: 8897573137072653998}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8310,7 +8207,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1214198107478992018}
   - {fileID: 1214198107192375049}
   - {fileID: 1214198106466624997}
   m_Father: {fileID: 8897573137072653998}
