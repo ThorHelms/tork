@@ -11,8 +11,6 @@ namespace Adrenak.Tork {
 
         public float m_MaxReverseInput = -.5f;
 
-        public Ackermann ackermann;
-
         private Vehicle _vehicle;
 
         private void Start()
@@ -28,29 +26,32 @@ namespace Adrenak.Tork {
             value = Mathf.Clamp(value, m_MaxReverseInput, 1);
         }
 
-        private void ApplyMotorTorque() {
-            float fs, fp, rs, rp;
+        private void ApplyMotorTorque()
+        {
+            var frontMaxTorque = _vehicle.FrontAxle.GetMaxTorque();
+            var backMaxTorque = _vehicle.BackAxle.GetMaxTorque();
 
-            // If we have Ackerman steering, we apply torque based on the steering radius of each wheel
-            var radii = AckermannUtils.GetRadii(ackermann.angle, ackermann.GetAxleSeparation(), ackermann.GetFrontAxleWidth());
-            var total = radii[0] + radii[1] + radii[2] + radii[3];
-            fp = radii[0] / total;
-            fs = radii[1] / total;
-            rp = radii[2] / total;
-            rs = radii[3] / total;
+            var torque = Mathf.Abs(value * maxTorque);
+            var maxTorquePerAxle = torque / 2;
 
-            if (ackermann.angle > 0) {
-                _vehicle.FrontAxle.RightWheel.Collider.motorTorque = value * maxTorque * fp;
-                _vehicle.FrontAxle.LeftWheel.Collider.motorTorque = value * maxTorque * fs;
-                _vehicle.BackAxle.RightWheel.Collider.motorTorque = value * maxTorque * rp;
-                _vehicle.BackAxle.LeftWheel.Collider.motorTorque = value * maxTorque * rs;
+            var frontTorque = maxTorquePerAxle;
+            var backTorque = maxTorquePerAxle;
+
+            if (frontMaxTorque < maxTorquePerAxle)
+            {
+                frontTorque = frontMaxTorque;
+                backTorque = Mathf.Clamp(torque - frontMaxTorque, 0, backMaxTorque);
             }
-            else {
-                _vehicle.FrontAxle.LeftWheel.Collider.motorTorque = value * maxTorque * fp;
-                _vehicle.FrontAxle.RightWheel.Collider.motorTorque = value * maxTorque * fs;
-                _vehicle.BackAxle.LeftWheel.Collider.motorTorque = value * maxTorque * rp;
-                _vehicle.BackAxle.RightWheel.Collider.motorTorque = value * maxTorque * rs;
+            else if (backMaxTorque < maxTorquePerAxle)
+            {
+                frontTorque = Mathf.Clamp(torque - backMaxTorque, 0, frontMaxTorque);
+                backTorque = backMaxTorque;
             }
+
+            var sign = value < 0 ? -1 : 1;
+
+            _vehicle.FrontAxle.ApplyTorque(frontTorque * sign);
+            _vehicle.BackAxle.ApplyTorque(backTorque * sign);
         }
     }
 }

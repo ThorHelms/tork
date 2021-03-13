@@ -106,7 +106,7 @@ namespace Adrenak.Tork {
         public const float k_ExtraRayLength = 1;
         public float RayLength => springLength + radius + k_ExtraRayLength;
 
-        void Start() {
+        private void Start() {
             m_Ray = new Ray();
 
             // Remove rigidbody component from the wheel
@@ -118,7 +118,7 @@ namespace Adrenak.Tork {
             rigidbody = GetComponentInParent<Rigidbody>();
         }
 
-        void FixedUpdate() {
+        private void FixedUpdate() {
             velocity = rigidbody.GetPointVelocity(transform.position);
 
             transform.localEulerAngles = new Vector3(
@@ -131,13 +131,13 @@ namespace Adrenak.Tork {
             CalculateRPM();
         }
 
-        void CalculateRPM() {
-            float metersPerMinute = rigidbody.velocity.magnitude * 60;
-            float wheelCircumference = 2 * Mathf.PI * radius;
+        private void CalculateRPM() {
+            var metersPerMinute = rigidbody.velocity.magnitude * 60;
+            var wheelCircumference = 2 * Mathf.PI * radius;
             //RPM = metersPerMinute / wheelCircumference;
         }
 
-        void CalculateSuspension() {
+        private void CalculateSuspension() {
             m_Ray.direction = -transform.up;
             m_Ray.origin = transform.position + transform.up * k_ExtraRayLength;
 
@@ -156,14 +156,14 @@ namespace Adrenak.Tork {
             compressionRatio = compressionDistance / springLength;
 
             // Calculate the force from the springs compression using Hooke's Law
-            float compressionForce = springStrength * compressionRatio;
+            var compressionForce = springStrength * compressionRatio;
             force += compressionForce;
 
             // Calculate the damping force based on compression rate of the spring
-            float rate = (m_PrevCompressionDist - compressionDistance) / Time.fixedDeltaTime;
+            var rate = (m_PrevCompressionDist - compressionDistance) / Time.fixedDeltaTime;
             m_PrevCompressionDist = compressionDistance;
 
-            float dampingForce = rate * springStrength * springDamper;
+            var dampingForce = rate * springStrength * springDamper;
             force -= dampingForce;
 
             suspensionForce = transform.up * force;
@@ -172,28 +172,27 @@ namespace Adrenak.Tork {
             rigidbody.AddForceAtPosition(suspensionForce, (hit.point));
         }
 
-        bool WheelRaycast(float maxDistance, ref RaycastHit hit) {
-            if (Physics.Raycast(m_Ray.origin, m_Ray.direction, out hit, maxDistance, m_RaycastLayers))
-                return true;
-            return false;
+        private bool WheelRaycast(float maxDistance, ref RaycastHit hit)
+        {
+            return Physics.Raycast(m_Ray.origin, m_Ray.direction, out hit, maxDistance, m_RaycastLayers);
         }
 
-        void CalculateFriction() {
+        private void CalculateFriction() {
             if (!isGrounded) return;
 
-            Vector3 right = transform.right;
-            Vector3 forward = transform.forward;
+            var right = transform.right;
+            var forward = transform.forward;
 
-            Vector3 lateralVelocity = Vector3.Project(velocity, right);
-            Vector3 forwardVelocity = Vector3.Project(velocity, forward);
-            Vector3 slip = (forwardVelocity + lateralVelocity) / 2;
+            var lateralVelocity = Vector3.Project(velocity, right);
+            var forwardVelocity = Vector3.Project(velocity, forward);
+            var slip = (forwardVelocity + lateralVelocity) / 2;
 
-            float lateralFriction = Vector3.Project(right, slip).magnitude * suspensionForce.magnitude / 9.8f / Time.fixedDeltaTime * lateralFrictionCoeff;
+            var lateralFriction = Vector3.Project(right, slip).magnitude * suspensionForce.magnitude / 9.8f / Time.fixedDeltaTime * lateralFrictionCoeff;
             rigidbody.AddForceAtPosition(-Vector3.Project(slip, lateralVelocity).normalized * lateralFriction, hit.point);
 
-            float motorForce = motorTorque / radius;
-            float maxForwardFriction = motorForce * forwardFrictionCoeff;
-            float appliedForwardFriction = 0;
+            var motorForce = motorTorque / radius;
+            var maxForwardFriction = motorForce * forwardFrictionCoeff;
+            var appliedForwardFriction = 0f;
             if (motorForce > 0)
                 appliedForwardFriction = Mathf.Clamp(motorForce, 0, maxForwardFriction);
             else

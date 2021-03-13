@@ -1,12 +1,24 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace Adrenak.Tork {
     public class WheelViz : MonoBehaviour {
-        [SerializeField] TorkWheelCollider target;
+#if UNITY_EDITOR
+        TorkWheelCollider target;
 
-        void OnDrawGizmos() {
-            if (target == null) return;
+        private void Start()
+        {
+            target = GetComponent<TorkWheelCollider>();
+        }
+
+        private void OnDrawGizmos() {
+            if (target == null)
+            {
+                Start();
+                if (target == null) return;
+            };
 
             var t = target.transform;
             Handles.color = Color.yellow;
@@ -20,5 +32,6 @@ namespace Adrenak.Tork {
             var pos = t.position + (-t.up * (target.RayLength - TorkWheelCollider.k_ExtraRayLength - target.compressionDistance - target.radius));
             Handles.DrawWireDisc(pos, t.right, target.radius);
         }
+#endif
     }
 }

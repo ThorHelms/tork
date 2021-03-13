@@ -6,10 +6,6 @@ namespace Adrenak.Tork {
         [SerializeField] private Rigidbody _rigidbody;
         public Rigidbody Rigidbody => _rigidbody;
 
-        [Header("Core Components")]
-        [SerializeField] private Ackermann _ackermann;
-        public Ackermann Ackermann => _ackermann;
-
         [SerializeField] private Steering _steering;
         public Steering Steering => _steering;
 
@@ -21,5 +17,10 @@ namespace Adrenak.Tork {
 
         [SerializeField] private TorkAxle _backAxle;
         public TorkAxle BackAxle => _backAxle;
+
+        public float GetAxleSeparation()
+        {
+            return (_frontAxle.GetAxlePosition() - _backAxle.GetAxlePosition()).magnitude;
+        }
     }
 }

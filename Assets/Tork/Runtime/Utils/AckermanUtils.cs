@@ -13,13 +13,13 @@ namespace Adrenak.Tork {
             // To avoid NaN assume primary angle isn't within [-1,1]
             if (Mathf.Abs(primaryAngle) < 1)
                 primaryAngle = Mathf.Abs(primaryAngle);
-            float close = separation / Mathf.Tan(Mathf.Abs(primaryAngle) * Mathf.Deg2Rad);
-            float far = close + width;
+            var close = separation / Mathf.Tan(Mathf.Abs(primaryAngle) * Mathf.Deg2Rad);
+            var far = close + width;
             return Mathf.Sign(primaryAngle) * Mathf.Atan(separation / far) * Mathf.Rad2Deg;
         }
 
         /// <summary>
-        /// Returns the current turning redius of each wheel
+        /// Returns the current turning radii of each wheel
         /// </summary>
         /// <param name="primaryAngle">Primary front angle. IE. if turning right, angle of front right wheel</param>
         /// <param name="separation">Distance between front and rear wheels</param>
@@ -40,25 +40,6 @@ namespace Adrenak.Tork {
                 rearPrimary,
                 rearSecondary
             };
-        }
-
-        /// <summary>
-        /// Returns current average turning radius of the wheels
-        /// </summary>
-        /// <param name="primaryAngle">Primary front angle. IE. if turning right, angle of front right wheel</param>
-        /// <param name="separation">Distance between front and rear wheels</param>
-        /// <param name="width">Distance between left and right wheels</param>
-        /// <returns></returns>
-        public static float GetRadius(float primaryAngle, float separation, float width){
-            // To avoid NaN we assume primaryAngle to be at least 1
-            primaryAngle = Mathf.Clamp(primaryAngle, 1, Mathf.Infinity);
-            var radii = GetRadii(primaryAngle, separation, width);
-            float sum = 0;
-
-            for (int i = 0; i < radii.Length; i++)
-                sum += radii[i];
-
-            return sum / 4;
         }
     }
 }
