@@ -3434,6 +3434,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394210660}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1428248157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1428248158}
+  - component: {fileID: 1428248159}
+  m_Layer: 0
+  m_Name: Drivetrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1428248158
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428248157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1792000741}
+  m_Father: {fileID: 4261488204551806}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1428248159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428248157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c28ac322bfa2be4783299ddfd7f1b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frontAxle: {fileID: 1434177002}
+  _backAxle: {fileID: 145354186}
 --- !u!1 &1434177000
 GameObject:
   m_ObjectHideFlags: 0
@@ -4139,13 +4185,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792000740}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1434177001}
   - {fileID: 145354185}
-  m_Father: {fileID: 4261488204551806}
+  m_Father: {fileID: 1428248158}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1809145394
@@ -5624,7 +5670,7 @@ Transform:
   m_LocalPosition: {x: 59.5, y: 2.3, z: 63.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1792000741}
+  - {fileID: 1428248158}
   - {fileID: 4576911682790254}
   - {fileID: 4418453495901924}
   - {fileID: 8897573137072653998}
@@ -7274,11 +7320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da1bb9a22dc0004c803629affe1f6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 54767531498984270}
-  _steering: {fileID: 1214198106466624996}
-  _motor: {fileID: 1214198107192375048}
-  _frontAxle: {fileID: 1434177002}
-  _backAxle: {fileID: 145354186}
 --- !u!1 &574169469284564042
 GameObject:
   m_ObjectHideFlags: 0

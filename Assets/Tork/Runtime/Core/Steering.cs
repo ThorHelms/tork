@@ -28,8 +28,8 @@ namespace Adrenak.Tork {
                 _angle = 0;
             }
 
-            _vehicle.BackAxle.SetSteering(0);
-            _vehicle.FrontAxle.SetSteering(_angle);
+            _vehicle.Drivetrain.BackAxle.SetSteering(0);
+            _vehicle.Drivetrain.FrontAxle.SetSteering(_angle);
         }
     }
 }

@@ -3,24 +3,20 @@
 namespace Adrenak.Tork {
     public class Vehicle : MonoBehaviour
     {
-        [SerializeField] private Rigidbody _rigidbody;
-        public Rigidbody Rigidbody => _rigidbody;
+        public Rigidbody Rigidbody { get; private set; }
 
-        [SerializeField] private Steering _steering;
-        public Steering Steering => _steering;
+        public Steering Steering { get; private set; }
 
-        [SerializeField] private Motor _motor;
-        public Motor Motor => _motor;
+        public Motor Motor { get; private set; }
 
-        [SerializeField] private TorkAxle _frontAxle;
-        public TorkAxle FrontAxle => _frontAxle;
+        public TorkDrivetrain Drivetrain { get; private set; }
 
-        [SerializeField] private TorkAxle _backAxle;
-        public TorkAxle BackAxle => _backAxle;
-
-        public float GetAxleSeparation()
+        private void Start()
         {
-            return (_frontAxle.GetAxlePosition() - _backAxle.GetAxlePosition()).magnitude;
+            Rigidbody = GetComponentInChildren<Rigidbody>();
+            Steering = GetComponentInChildren<Steering>();
+            Motor = GetComponentInChildren<Motor>();
+            Drivetrain = GetComponentInChildren<TorkDrivetrain>();
         }
     }
 }
