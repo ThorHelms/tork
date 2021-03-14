@@ -12,5 +12,10 @@ namespace Adrenak.Tork
         {
             _wheelCollider = GetComponentInChildren<TorkWheelCollider>();
         }
+
+        private void Update()
+        {
+            _visualWheel.localEulerAngles = _wheelCollider.transform.localEulerAngles;
+        }
     }
 }

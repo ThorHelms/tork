@@ -10,6 +10,13 @@ namespace Adrenak.Tork
         [SerializeField] private TorkAxle _backAxle;
         public TorkAxle BackAxle => _backAxle;
 
+        private TorkAxle[] _axles;
+
+        private void Start()
+        {
+            _axles = GetComponentsInChildren<TorkAxle>();
+        }
+
         public void ApplyMotorTorque(float torque)
         {
             var frontMaxTorque = FrontAxle.GetMaxTorque();
@@ -38,5 +45,20 @@ namespace Adrenak.Tork
             BackAxle.ApplyTorque(backTorque * sign);
         }
 
+        public void SteerTowards(Vector3 turningPoint, bool left)
+        {
+            foreach (var axle in _axles)
+            {
+                axle.SteerTowards(turningPoint, left);
+            }
+        }
+
+        public void ResetSteering()
+        {
+            foreach (var axle in _axles)
+            {
+                axle.ResetSteering();
+            }
+        }
     }
 }

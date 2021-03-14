@@ -50,6 +50,9 @@ namespace Adrenak.Tork {
         [Header("Raycasting")]
         public LayerMask m_RaycastLayers;
 
+        [Header("Debug/test")]
+        [SerializeField] private bool _useFixedUpdate = true;
+
         /// <summary>
         /// The velocity of the wheel (at the raycast hit point) in world space
         /// </summary>
@@ -118,7 +121,13 @@ namespace Adrenak.Tork {
             rigidbody = GetComponentInParent<Rigidbody>();
         }
 
-        private void FixedUpdate() {
+        private void FixedUpdate()
+        {
+            if (!_useFixedUpdate)
+            {
+                return;
+            }
+
             velocity = rigidbody.GetPointVelocity(transform.position);
 
             transform.localEulerAngles = new Vector3(
@@ -129,6 +138,26 @@ namespace Adrenak.Tork {
             CalculateSuspension();
             CalculateFriction();
             CalculateRPM();
+        }
+
+        public void SteerTowards(Vector3 turningPoint, bool left)
+        {
+            // TODO: Use this instead of steer-angle
+            var localEulerAngle = transform.localEulerAngles;
+            transform.LookAt(turningPoint);
+            transform.localEulerAngles = new Vector3(
+                localEulerAngle.x,
+                transform.localEulerAngles.y + (left ? 180 : 0),
+                localEulerAngle.z
+                );
+        }
+
+        public void ResetSteering()
+        {
+            transform.localEulerAngles = new Vector3(
+                transform.localEulerAngles.x,
+                0,
+                transform.localEulerAngles.z);
         }
 
         private void CalculateRPM() {
