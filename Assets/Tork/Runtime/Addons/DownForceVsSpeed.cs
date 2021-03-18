@@ -10,8 +10,7 @@ namespace Adrenak.Tork {
 
         private void Start()
         {
-            var vehicle = GetComponentInParent<Vehicle>();
-            _rigidbody = vehicle.Rigidbody;
+            _rigidbody = GetComponentInParent<Rigidbody>();
         }
 
         private void Update() {

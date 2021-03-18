@@ -2,15 +2,23 @@
 
 namespace Adrenak.Tork {
     public class DemoInputSource : MonoBehaviour {
-        [SerializeField] Vehicle m_Vehicle;
+        [Tooltip("Should point to a vehicle that has an IMotor and ISteering component, either on itself or as a child component somewhere.")]
+        [SerializeField] private GameObject _vehicle;
+        private IMotor _motor;
+        private ISteering _steering;
 
-        public void SetVehicle(Vehicle vehicle){
-            m_Vehicle = vehicle;
+        private void Start()
+        {
+            if (_vehicle != null)
+            {
+                _motor = _vehicle.GetComponentInChildren<IMotor>();
+                _steering = _vehicle.GetComponentInChildren<ISteering>();
+            }
         }
 
-        void Update(){
-            m_Vehicle.Motor.value = Input.GetAxis("Vertical");
-            m_Vehicle.Steering.value = Input.GetAxis("Horizontal");
+        private void Update(){
+            _motor?.SetThrottle(Input.GetAxis("Vertical"));
+            _steering?.SetSteering(Input.GetAxis("Horizontal"));
         }
     }
 }

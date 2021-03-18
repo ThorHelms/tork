@@ -5,11 +5,11 @@ namespace Adrenak.Tork {
     {
         private void Start()
         {
-            var vehicle = GetComponentInParent<Vehicle>();
+            var rb = GetComponentInParent<Rigidbody>();
 
-            if (vehicle?.Rigidbody == null)
+            if (rb == null)
                 return;
-            vehicle.Rigidbody.centerOfMass = vehicle.Rigidbody.transform.InverseTransformPoint(transform.position);
+            rb.centerOfMass = rb.transform.InverseTransformPoint(transform.position);
         }
     }
 }

@@ -13,12 +13,15 @@
 using UnityEngine;
 
 namespace Adrenak.Tork {
-    public class TorkWheelCollider : MonoBehaviour {
+    public class TorkWheelCollider : MonoBehaviour, IPoweredWheel, ISteerableWheel {
         // See at the top of the file for NOTE (A) to read about this.
         const float engineShaftToWheelRatio = 25;
 
         [Tooltip("The radius of the wheel")]
         public float radius = 0.25f;
+
+        [Tooltip("A height offset for applying forces, to prevent the vehicle from rolling as much.")]
+        [SerializeField] private float _applyForcesOffset;
 
         [Header("Spring")]
         [Tooltip("How far the spring expands when it is in air.")]
@@ -47,11 +50,10 @@ namespace Adrenak.Tork {
         [Tooltip("A constant friction % applied at all times. This allows the car to slow down on its own.")]
         public float rollingFrictionCoeff = .1f;
 
+        public SlipFrictionCurve curve;
+
         [Header("Raycasting")]
         public LayerMask m_RaycastLayers;
-
-        [Header("Debug/test")]
-        [SerializeField] private bool _useFixedUpdate = true;
 
         /// <summary>
         /// The velocity of the wheel (at the raycast hit point) in world space
@@ -104,6 +106,8 @@ namespace Adrenak.Tork {
         /// </summary>
         public Vector3 suspensionForce { get; private set; }
 
+        private Vector3? _turningPoint { get; set; }
+
         Ray m_Ray;
         new Rigidbody rigidbody;
         public const float k_ExtraRayLength = 1;
@@ -123,41 +127,66 @@ namespace Adrenak.Tork {
 
         private void FixedUpdate()
         {
-            if (!_useFixedUpdate)
-            {
-                return;
-            }
-
             velocity = rigidbody.GetPointVelocity(transform.position);
 
-            transform.localEulerAngles = new Vector3(
-                transform.localEulerAngles.x,
-                steerAngle,
-                transform.localEulerAngles.z
-            );
+            CalculateSteering();
+            UpdateLateralFriction();
             CalculateSuspension();
             CalculateFriction();
             CalculateRPM();
         }
 
-        public void SteerTowards(Vector3 turningPoint, bool left)
+        private void UpdateLateralFriction()
         {
-            // TODO: Use this instead of steer-angle
-            var localEulerAngle = transform.localEulerAngles;
-            transform.LookAt(turningPoint);
-            transform.localEulerAngles = new Vector3(
-                localEulerAngle.x,
-                transform.localEulerAngles.y + (left ? 180 : 0),
-                localEulerAngle.z
+            lateralFrictionCoeff = curve.Evaluate(Vector3.Project(velocity, transform.right).magnitude);
+        }
+
+        private void CalculateSteering()
+        {
+            if (_turningPoint == null)
+            {
+                steerAngle = 0;
+                transform.localEulerAngles = new Vector3(
+                    transform.localEulerAngles.x,
+                    0,
+                    transform.localEulerAngles.z);
+            }
+            else
+            {
+                var localEulerAngle = transform.localEulerAngles;
+                transform.LookAt(_turningPoint.Value);
+                steerAngle = (transform.localEulerAngles.y + 90) % 360;
+                if (steerAngle < -90 || (90 < steerAngle && steerAngle < 270))
+                {
+                    steerAngle -= 180;
+                }
+                //steerAngle = (transform.localEulerAngles.y + 90) % 180 - 90;
+                transform.localEulerAngles = new Vector3(
+                    localEulerAngle.x,
+                    steerAngle,
+                    localEulerAngle.z
                 );
+            }
+        }
+
+        public void SteerTowards(Vector3 turningPoint)
+        {
+            _turningPoint = turningPoint;
+        }
+
+        public float GetTurningRadius()
+        {
+            if (_turningPoint == null)
+            {
+                return float.MaxValue;
+            }
+
+            return (transform.position - _turningPoint.Value).magnitude;
         }
 
         public void ResetSteering()
         {
-            transform.localEulerAngles = new Vector3(
-                transform.localEulerAngles.x,
-                0,
-                transform.localEulerAngles.z);
+            _turningPoint = null;
         }
 
         private void CalculateRPM() {
@@ -209,6 +238,8 @@ namespace Adrenak.Tork {
         private void CalculateFriction() {
             if (!isGrounded) return;
 
+            var forceOffset = transform.up * _applyForcesOffset;
+
             var right = transform.right;
             var forward = transform.forward;
 
@@ -217,7 +248,7 @@ namespace Adrenak.Tork {
             var slip = (forwardVelocity + lateralVelocity) / 2;
 
             var lateralFriction = Vector3.Project(right, slip).magnitude * suspensionForce.magnitude / 9.8f / Time.fixedDeltaTime * lateralFrictionCoeff;
-            rigidbody.AddForceAtPosition(-Vector3.Project(slip, lateralVelocity).normalized * lateralFriction, hit.point);
+            rigidbody.AddForceAtPosition(-Vector3.Project(slip, lateralVelocity).normalized * lateralFriction, hit.point + forceOffset);
 
             var motorForce = motorTorque / radius;
             var maxForwardFriction = motorForce * forwardFrictionCoeff;
@@ -227,7 +258,12 @@ namespace Adrenak.Tork {
             else
                 appliedForwardFriction = Mathf.Clamp(motorForce, maxForwardFriction, 0);
 
-            rigidbody.AddForceAtPosition(forward * appliedForwardFriction * engineShaftToWheelRatio, hit.point);
+            rigidbody.AddForceAtPosition(forward * appliedForwardFriction * engineShaftToWheelRatio, hit.point + forceOffset);
+        }
+
+        public void ApplyTorque(float torque)
+        {
+            motorTorque = torque;
         }
     }
 }

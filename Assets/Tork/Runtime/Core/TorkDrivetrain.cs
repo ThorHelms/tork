@@ -2,24 +2,24 @@
 
 namespace Adrenak.Tork
 {
-    public class TorkDrivetrain : MonoBehaviour
+    public class TorkDrivetrain : MonoBehaviour, IDrivetrain
     {
-        [SerializeField] private TorkAxle _frontAxle;
-        public TorkAxle FrontAxle => _frontAxle;
-
-        [SerializeField] private TorkAxle _backAxle;
-        public TorkAxle BackAxle => _backAxle;
-
-        private TorkAxle[] _axles;
+        private IPoweredAxle[] _axles;
 
         private void Start()
         {
-            _axles = GetComponentsInChildren<TorkAxle>();
+            _axles = GetComponentsInChildren<IPoweredAxle>();
         }
 
         public void ApplyMotorTorque(float torque)
         {
-            var frontMaxTorque = FrontAxle.GetMaxTorque();
+            // TODO: Apply torque according to how much torque each axle can receive, see code below
+            foreach (var axle in _axles)
+            {
+                axle.ApplyTorque(torque / _axles.Length);
+            }
+            
+            /*var frontMaxTorque = FrontAxle.GetMaxTorque();
             var backMaxTorque = BackAxle.GetMaxTorque();
 
             var absTorque = Mathf.Abs(torque);
@@ -42,23 +42,7 @@ namespace Adrenak.Tork
             var sign = torque < 0 ? -1 : 1;
 
             FrontAxle.ApplyTorque(frontTorque * sign);
-            BackAxle.ApplyTorque(backTorque * sign);
-        }
-
-        public void SteerTowards(Vector3 turningPoint, bool left)
-        {
-            foreach (var axle in _axles)
-            {
-                axle.SteerTowards(turningPoint, left);
-            }
-        }
-
-        public void ResetSteering()
-        {
-            foreach (var axle in _axles)
-            {
-                axle.ResetSteering();
-            }
+            BackAxle.ApplyTorque(backTorque * sign);*/
         }
     }
 }

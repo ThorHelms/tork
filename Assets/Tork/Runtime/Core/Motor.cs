@@ -1,28 +1,28 @@
 ﻿using UnityEngine;
 
 namespace Adrenak.Tork {
-    public class Motor : MonoBehaviour {
+    public class Motor : MonoBehaviour, IMotor {
         [Tooltip("The maximum torque that the motor generates")]
-        public float maxTorque = 10000;
+        [SerializeField] private float _maxTorque = 10000;
 
-        [Tooltip("Multiplier to the maxTorque")]
-        public float value;
+        [SerializeField] private float _maxReverseInput = -.5f;
 
-        public float m_MaxReverseInput = -.5f;
+        private float _throttle = 0;
 
-        private Vehicle _vehicle;
+        private IDrivetrain _drivetrain;
 
         private void Start()
         {
-            _vehicle = GetComponentInParent<Vehicle>();
+            _drivetrain = GetComponentInChildren<IDrivetrain>();
         }
 
         private void FixedUpdate() {
-            _vehicle.Drivetrain.ApplyMotorTorque(value * maxTorque);
+            _drivetrain.ApplyMotorTorque(_throttle * _maxTorque);
         }
 
-        private void Update() {
-            value = Mathf.Clamp(value, m_MaxReverseInput, 1);
+        public void SetThrottle(float throttle)
+        {
+            _throttle = Mathf.Clamp(throttle, _maxReverseInput, 1);
         }
     }
 }
