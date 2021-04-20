@@ -7,5 +7,6 @@ namespace Adrenak.Tork
         void ResetSteering();
         void SteerTowards(Vector3 turningPoint);
         float GetTurningRadius();
+        float GetTurningAngle();
     }
 }

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Adrenak.Tork
+﻿namespace Adrenak.Tork
 {
     public interface ISuspension
     {

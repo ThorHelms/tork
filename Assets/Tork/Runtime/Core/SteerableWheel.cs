@@ -26,6 +26,11 @@ namespace Adrenak.Tork
             return (transform.position - _turningPoint.Value).magnitude;
         }
 
+        public float GetTurningAngle()
+        {
+            return transform.localEulerAngles.y;
+        }
+
         public void ResetSteering()
         {
             _turningPoint = null;
