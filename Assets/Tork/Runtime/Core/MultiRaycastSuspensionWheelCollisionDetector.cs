@@ -39,7 +39,7 @@ namespace Adrenak.Tork
 
                 for (var j = 0; j < _numberRaysWidth; j++)
                 {
-                    var origin = transform.position;
+                    var origin = transform.position + transform.up * _radius / 2;
 
                     if (_numberRaysWidth > 1)
                     {

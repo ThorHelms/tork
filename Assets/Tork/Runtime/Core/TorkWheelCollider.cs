@@ -14,7 +14,7 @@ using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Adrenak.Tork {
-    public class TorkWheelCollider : MonoBehaviour, IPoweredWheel {
+    public class TorkWheelCollider : MonoBehaviour, IPoweredWheel, IRpmProvider {
         // See at the top of the file for NOTE (A) to read about this.
         const float engineShaftToWheelRatio = 25;
 
@@ -48,6 +48,8 @@ namespace Adrenak.Tork {
 
         private IWheelCollisionDetector _wheelCollisionDetector;
 
+        private float _rpm;
+
         private void Start()
         {
             rb = GetComponentInParent<Rigidbody>();
@@ -58,13 +60,8 @@ namespace Adrenak.Tork {
         {
             velocity = rb.GetPointVelocity(transform.position);
 
-            UpdateLateralFriction();
             CalculateFriction();
-        }
-
-        private void UpdateLateralFriction()
-        {
-            lateralFrictionCoeff = curve.Evaluate(Vector3.Project(velocity, transform.right).magnitude);
+            UpdateRpm();
         }
 
         private void CalculateFriction()
@@ -87,7 +84,7 @@ namespace Adrenak.Tork {
             var forwardVelocity = Vector3.Project(velocity, forward);
             var slip = (forwardVelocity + lateralVelocity) / 2;
 
-            var lateralFriction = Vector3.Project(right, slip).magnitude * lateralFrictionMultiplier / Time.fixedDeltaTime * lateralFrictionCoeff;
+            var lateralFriction = Vector3.Project(right, slip).magnitude * lateralVelocity.magnitude * lateralFrictionMultiplier / Time.fixedDeltaTime;
             rb.AddForceAtPosition(-Vector3.Project(slip, lateralVelocity).normalized * lateralFriction, point + forceOffset);
 
             var motorForce = Mathf.Abs(motorTorque / radius);
@@ -102,5 +99,14 @@ namespace Adrenak.Tork {
         {
             motorTorque = torque;
         }
+
+        private void UpdateRpm()
+        {
+            var forwardVelocity = Vector3.Dot(velocity, transform.forward);
+            var rotPerSec = forwardVelocity / (2 * Mathf.PI * radius);
+            _rpm = rotPerSec * 60;
+        }
+
+        public float GetRpm() => _rpm;
     }
 }
