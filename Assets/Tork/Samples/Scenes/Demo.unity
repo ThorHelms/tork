@@ -181,10 +181,11 @@ GameObject:
   - component: {fileID: 34747065}
   - component: {fileID: 34747064}
   - component: {fileID: 34747069}
-  - component: {fileID: 34747068}
   - component: {fileID: 34747067}
+  - component: {fileID: 34747070}
+  - component: {fileID: 34747068}
   m_Layer: 7
-  m_Name: BLW visual
+  m_Name: BLW visual1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,15 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &34747068
 MonoBehaviour:
@@ -298,13 +292,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 34747062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae75eb09bb4c9e44a23b588ac206042, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c75fcc4dd6f76d4aa1cb715cc81a3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _numberRaysRound: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _angleLimit: 180
   _raycastLayers:
     serializedVersion: 2
@@ -321,6 +313,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98775704cf9d74ea78e5e3ded42445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &34747070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34747062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &114752787
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,10 +437,11 @@ GameObject:
   - component: {fileID: 133316335}
   - component: {fileID: 133316341}
   - component: {fileID: 133316340}
-  - component: {fileID: 133316339}
   - component: {fileID: 133316338}
+  - component: {fileID: 133316342}
+  - component: {fileID: 133316339}
   m_Layer: 7
-  m_Name: FRW visual
+  m_Name: FRW visual1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,15 +536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &133316339
 MonoBehaviour:
@@ -548,13 +548,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 133316333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae75eb09bb4c9e44a23b588ac206042, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c75fcc4dd6f76d4aa1cb715cc81a3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _numberRaysRound: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _angleLimit: 180
   _raycastLayers:
     serializedVersion: 2
@@ -583,6 +581,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a829686a30f7a0041be4c6552ddaba9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &133316342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133316333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &137502546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,6 +1344,7 @@ GameObject:
   - component: {fileID: 317401500}
   - component: {fileID: 317401499}
   - component: {fileID: 317401503}
+  - component: {fileID: 317401504}
   m_Layer: 7
   m_Name: Front Left Wheel
   m_TagString: Untagged
@@ -1366,15 +1379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0.38
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &317401500
 MonoBehaviour:
@@ -1402,13 +1408,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberRaysLength: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _raycastLayers:
     serializedVersion: 2
     m_Bits: 64
   _suspensionTravel: 0.4
-  _sensitivity: 0.001
 --- !u!114 &317401502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1436,6 +1439,20 @@ MonoBehaviour:
   _suspensionDistanceProvider: {fileID: 0}
   _suspensionForce: 30000
   _suspensionDamper: 4000
+--- !u!114 &317401504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317401497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &321892343
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,10 +1645,11 @@ GameObject:
   - component: {fileID: 339932457}
   - component: {fileID: 339932463}
   - component: {fileID: 339932462}
-  - component: {fileID: 339932461}
   - component: {fileID: 339932460}
+  - component: {fileID: 339932464}
+  - component: {fileID: 339932461}
   m_Layer: 7
-  m_Name: FLW visual
+  m_Name: FLW visual1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1726,15 +1744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &339932461
 MonoBehaviour:
@@ -1745,13 +1756,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 339932455}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae75eb09bb4c9e44a23b588ac206042, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c75fcc4dd6f76d4aa1cb715cc81a3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _numberRaysRound: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _angleLimit: 180
   _raycastLayers:
     serializedVersion: 2
@@ -1780,6 +1789,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a829686a30f7a0041be4c6552ddaba9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &339932464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339932455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &344388382
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,6 +1816,7 @@ GameObject:
   - component: {fileID: 344388385}
   - component: {fileID: 344388384}
   - component: {fileID: 344388387}
+  - component: {fileID: 344388388}
   m_Layer: 7
   m_Name: Back Left Wheel
   m_TagString: Untagged
@@ -1827,15 +1851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0.38
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &344388385
 MonoBehaviour:
@@ -1851,13 +1868,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberRaysLength: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _raycastLayers:
     serializedVersion: 2
     m_Bits: 64
   _suspensionTravel: 0.4
-  _sensitivity: 0.001
 --- !u!114 &344388386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1885,6 +1899,20 @@ MonoBehaviour:
   _suspensionDistanceProvider: {fileID: 0}
   _suspensionForce: 30000
   _suspensionDamper: 4000
+--- !u!114 &344388388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344388382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &358142903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2755,10 +2783,11 @@ GameObject:
   - component: {fileID: 530922802}
   - component: {fileID: 530922801}
   - component: {fileID: 530922806}
-  - component: {fileID: 530922805}
   - component: {fileID: 530922804}
+  - component: {fileID: 530922807}
+  - component: {fileID: 530922805}
   m_Layer: 7
-  m_Name: BRW visual
+  m_Name: BRW visual1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2853,15 +2882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &530922805
 MonoBehaviour:
@@ -2872,13 +2894,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 530922799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae75eb09bb4c9e44a23b588ac206042, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c75fcc4dd6f76d4aa1cb715cc81a3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _numberRaysRound: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _angleLimit: 180
   _raycastLayers:
     serializedVersion: 2
@@ -2895,6 +2915,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd98775704cf9d74ea78e5e3ded42445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &530922807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530922799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &595338419
 GameObject:
   m_ObjectHideFlags: 0
@@ -6050,7 +6084,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1164765618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c28ac322bfa2be4783299ddfd7f1b0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 276b453759db3214a8025292a84ed60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1164765620
@@ -6110,7 +6144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1164765618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056dd3d9a80d4444abad9ebc9805a503, type: 3}
+  m_Script: {fileID: 11500000, guid: 0372ba1291fa97a4fa6ea0c6f3dcc41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _minTurningRadius: 8
@@ -6294,6 +6328,7 @@ GameObject:
   - component: {fileID: 1280817281}
   - component: {fileID: 1280817280}
   - component: {fileID: 1280817283}
+  - component: {fileID: 1280817284}
   m_Layer: 7
   m_Name: Back Right Wheel
   m_TagString: Untagged
@@ -6328,15 +6363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0.38
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &1280817281
 MonoBehaviour:
@@ -6352,13 +6380,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberRaysLength: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _raycastLayers:
     serializedVersion: 2
     m_Bits: 64
   _suspensionTravel: 0.4
-  _sensitivity: 0.001
 --- !u!114 &1280817282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6386,6 +6411,20 @@ MonoBehaviour:
   _suspensionDistanceProvider: {fileID: 0}
   _suspensionForce: 30000
   _suspensionDamper: 4000
+--- !u!114 &1280817284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280817278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &1282117735
 GameObject:
   m_ObjectHideFlags: 0
@@ -8146,6 +8185,7 @@ GameObject:
   - component: {fileID: 1820658407}
   - component: {fileID: 1820658406}
   - component: {fileID: 1820658410}
+  - component: {fileID: 1820658411}
   m_Layer: 7
   m_Name: Front Right Wheel
   m_TagString: Untagged
@@ -8180,15 +8220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0bd0950164284e970abf5ee4cefde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.31
   _applyForcesOffset: 0.38
-  lateralFrictionCoeff: 1
   forwardFrictionCoeff: 1
-  curve:
-    maxCoeff: 0.7
-    minCoeff: 0.4
-    softness: 15
-    criticalSlip: 15
   lateralFrictionMultiplier: 750
 --- !u!114 &1820658407
 MonoBehaviour:
@@ -8216,13 +8249,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _numberRaysLength: 36
   _numberRaysWidth: 3
-  _radius: 0.31
-  _width: 0.2
   _raycastLayers:
     serializedVersion: 2
     m_Bits: 64
   _suspensionTravel: 0.4
-  _sensitivity: 0.001
 --- !u!114 &1820658409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8250,6 +8280,20 @@ MonoBehaviour:
   _suspensionDistanceProvider: {fileID: 0}
   _suspensionForce: 30000
   _suspensionDamper: 4000
+--- !u!114 &1820658411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820658404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7121ba769a7971408b5d137f359be3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 0.31
+  _width: 0.2
 --- !u!1 &1844972771
 GameObject:
   m_ObjectHideFlags: 0
@@ -9678,7 +9722,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132795726975416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c28ac322bfa2be4783299ddfd7f1b0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 276b453759db3214a8025292a84ed60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1132795726975419
@@ -9690,7 +9734,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132795726975416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056dd3d9a80d4444abad9ebc9805a503, type: 3}
+  m_Script: {fileID: 11500000, guid: 0372ba1291fa97a4fa6ea0c6f3dcc41d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _minTurningRadius: 8

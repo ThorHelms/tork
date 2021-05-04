@@ -9,18 +9,24 @@ namespace Adrenak.Tork
         private void Start()
         {
             _wheelCollisionDetector = GetComponent<IWheelCollisionDetector>();
+
+            if (_wheelCollisionDetector == null)
+            {
+                Debug.LogWarning($"Missing {nameof(IWheelCollisionDetector)} in {transform.name}");
+            }
         }
 
         private void Update()
         {
-            if (_wheelCollisionDetector.TryGetForwardCollision(out var pointForward, out var directionForward))
+            if (_wheelCollisionDetector == null)
             {
-                Debug.DrawRay(pointForward, directionForward, Color.green);
+                return;
             }
 
-            if (_wheelCollisionDetector.TryGetBackwardCollision(out var pointBackward, out var directionBackward))
+            if (_wheelCollisionDetector.TryGetCollision(out var point, out var normal, out var collider, out var rb,
+                out var t))
             {
-                Debug.DrawRay(pointBackward, directionBackward, Color.red);
+                Debug.DrawRay(point, normal, Color.green);
             }
         }
     }

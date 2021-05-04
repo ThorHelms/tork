@@ -18,24 +18,13 @@ namespace Adrenak.Tork {
         // See at the top of the file for NOTE (A) to read about this.
         const float engineShaftToWheelRatio = 25;
 
-        [Tooltip("The radius of the wheel")]
-        public float radius = 0.25f;
-
         [Tooltip("A height offset for applying forces, to prevent the vehicle from rolling as much.")]
         [SerializeField] private float _applyForcesOffset;
-
-        [Header("Friction")]
-        [Tooltip("Determines the friction force that enables the wheel to exert sideways force while turning." +
-        "Values below 1 will cause the wheel to drift. Values above 1 will cause sharp turns." +
-        "Values outside 0 and 1 are unnatural. Tip: Reduce this for ice, increase for asphalt.")]
-        public float lateralFrictionCoeff = 1;
 
         [Tooltip("Determines the friction force that enables the wheel to exert forward force while experiencing torque. " +
         "Values below 1 will cause the wheel to slip (like ice). Values above 1 will cause the wheel to have high force (and thus higher speeds). " +
         "Values outside 0 and 1 are unnatural. Tip: Reduce this for ice, increase for asphalt.")]
         public float forwardFrictionCoeff = 1;
-
-        public SlipFrictionCurve curve;
 
         public Vector3 velocity { get; private set; }
 
@@ -44,21 +33,44 @@ namespace Adrenak.Tork {
         public float lateralFrictionMultiplier = 300;
 
 
-        private Rigidbody rb;
+        private Rigidbody _rb;
 
         private IWheelCollisionDetector _wheelCollisionDetector;
 
         private float _rpm;
 
+        private IWheel _wheel;
+
         private void Start()
         {
-            rb = GetComponentInParent<Rigidbody>();
+            _rb = GetComponentInParent<Rigidbody>();
             _wheelCollisionDetector = GetComponent<IWheelCollisionDetector>();
+            _wheel = GetComponent<IWheel>();
+
+            if (_rb == null)
+            {
+                Debug.LogWarning($"Missing {nameof(Rigidbody)} in parent of {transform.name}");
+            }
+
+            if (_wheelCollisionDetector == null)
+            {
+                Debug.LogWarning($"Missing {nameof(IWheelCollisionDetector)} in {transform.name}");
+            }
+
+            if (_wheel == null)
+            {
+                Debug.LogWarning($"Missing {nameof(IWheel)} in {transform.name}");
+            }
         }
 
         private void FixedUpdate()
         {
-            velocity = rb.GetPointVelocity(transform.position);
+            if (_rb == null || _wheelCollisionDetector == null || _wheel == null)
+            {
+                return;
+            }
+
+            velocity = _rb.GetPointVelocity(transform.position);
 
             CalculateFriction();
             UpdateRpm();
@@ -66,9 +78,7 @@ namespace Adrenak.Tork {
 
         private void CalculateFriction()
         {
-            var isGrounded = motorTorque > 0
-                ? _wheelCollisionDetector.TryGetForwardCollision(out var point, out var direction)
-                : _wheelCollisionDetector.TryGetBackwardCollision(out point, out direction);
+            var isGrounded = _wheelCollisionDetector.TryGetCollision(out var point, out var normal, out var collider, out var rb, out var t);
 
             if (!isGrounded)
             {
@@ -80,19 +90,25 @@ namespace Adrenak.Tork {
             var right = transform.right;
             var forward = transform.forward;
 
+            var direction = Vector3.Cross(normal, right);
+            if (motorTorque < 0)
+            {
+                direction *= -1;
+            }
+
             var lateralVelocity = Vector3.Project(velocity, right);
             var forwardVelocity = Vector3.Project(velocity, forward);
             var slip = (forwardVelocity + lateralVelocity) / 2;
 
             var lateralFriction = Vector3.Project(right, slip).magnitude * lateralVelocity.magnitude * lateralFrictionMultiplier / Time.fixedDeltaTime;
-            rb.AddForceAtPosition(-Vector3.Project(slip, lateralVelocity).normalized * lateralFriction, point + forceOffset);
+            _rb.AddForceAtPosition(-Vector3.Project(slip, lateralVelocity).normalized * lateralFriction, point + forceOffset);
 
-            var motorForce = Mathf.Abs(motorTorque / radius);
+            var motorForce = Mathf.Abs(motorTorque / _wheel.GetRadius());
             var maxForwardFriction = motorForce * forwardFrictionCoeff;
             var appliedForwardFriction = Mathf.Clamp(motorForce, 0, maxForwardFriction);
 
             var forwardForce = direction.normalized * appliedForwardFriction * engineShaftToWheelRatio;
-            rb.AddForceAtPosition(forwardForce, point + forceOffset);
+            _rb.AddForceAtPosition(forwardForce, point + forceOffset);
         }
 
         public void ApplyTorque(float torque)
@@ -103,7 +119,7 @@ namespace Adrenak.Tork {
         private void UpdateRpm()
         {
             var forwardVelocity = Vector3.Dot(velocity, transform.forward);
-            var rotPerSec = forwardVelocity / (2 * Mathf.PI * radius);
+            var rotPerSec = forwardVelocity / (2 * Mathf.PI * _wheel.GetRadius());
             _rpm = rotPerSec * 60;
         }
 

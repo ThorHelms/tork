@@ -15,10 +15,26 @@ namespace Adrenak.Tork {
             _rigidbody = GetComponentInParent<Rigidbody>();
             _steering = _rigidbody.transform.GetComponentInChildren<ISteering>();
             _initialMinTurningRadius = _steering?.GetMinTurningRadius() ?? 0;
+
+            if (_rigidbody == null)
+            {
+                Debug.LogWarning($"Missing {nameof(Rigidbody)} in parent of {transform.name}");
+            }
+
+            if (_steering == null)
+            {
+                Debug.LogWarning($"Missing {nameof(ISteering)} in children of {transform.name}");
+            }
         }
 
 
-        void Update() {
+        void Update()
+        {
+            if (_rigidbody == null || _steering == null)
+            {
+                return;
+            }
+
             var range = GetMaxSteerAtSpeed(_rigidbody.velocity.magnitude * 3.6f);
             _steering.SetMinTurningRadius(range * _initialMinTurningRadius);
         }
